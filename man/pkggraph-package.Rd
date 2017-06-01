@@ -11,6 +11,14 @@ The package is meant to interactively explore various dependencies of a package(
 \details{
 See the vignette for further details
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/talegari/pkggraph}
+  \item Report bugs at \url{https://github.com/talegari/pkggraph/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: KS Srikanth \email{sri.teach@gmail.com}
 

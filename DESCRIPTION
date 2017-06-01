@@ -36,3 +36,5 @@ Suggests:
     tidyverse (>= 1.1.1),
     BiocInstaller (>= 1.24.0)
 VignetteBuilder: knitr
+URL: https://github.com/talegari/pkggraph
+BugReports: https://github.com/talegari/pkggraph/issues
