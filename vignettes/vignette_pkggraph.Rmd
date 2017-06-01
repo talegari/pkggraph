@@ -32,10 +32,17 @@ suppressMessages(init())                                  # initiate the package
 
 ```{R, eval = TRUE }
 get_neighborhood("mlr") # a tibble, every row indicates a dependency
+# observe only 'Imports' and reverse 'Imports'
+neighborhood_graph("mlr", relation = "Imports") %>% 
+  plot()
 # observe the neighborhood of 'tidytext' package
 get_neighborhood("tidytext") %>% 
   make_neighborhood_graph() %>% 
   plot()
+# interact with the neighborhood of 'tm' package
+# legend does not appear in the vignette, but it appears directly
+neighborhood_graph("tm") %>% 
+  plotd3(700, 700)
 # which packages work as 'hubs' or 'authorities' in the above graph
 neighborhood_graph("tidytext", type = "igraph") %>% 
   extract2(1) %>% 
@@ -147,6 +154,7 @@ This function captures both dependencies and reverse dependencies until a specif
 
 ```{R, eval = TRUE }
 get_neighborhood("hash", level = 2)
+
 get_neighborhood("hash", level = 2) %>% 
   make_neighborhood_graph %>% 
   plot()
@@ -183,9 +191,20 @@ get_neighborhood("mlr", relation = "Imports", interconnect = FALSE) %>%
 
 - `neighborhood_graph` creates a graph object of a set of packages of class `pkggraph`. This takes same arguments as `get_neighborhood` and additionally `type`. Argument `type` defaults to `igraph`. The alternative is `network`.
 
-- `make_neighborhood_graph` accepts the output of any `get_*` as input and produces a graph object.
+```{R, eval = TRUE }
+neighborhood_graph("caret", relation = "Imports") %>% 
+  plot()
+```
+
+`make_neighborhood_graph` accepts the output of any `get_*` as input and produces a graph object.
 
 > Essentially, you can get the information from `get_` function after some trial and error, then create a graph object for further analysis or plotting.
+
+```{R, eval = TRUE}
+get_all_reverse_dependencies("rpart", relation = "Imports") %>% 
+make_neighborhood_graph() %>% 
+  plot()
+```
 
 # Checking dependencies and `relies`
 
@@ -202,14 +221,31 @@ relies("glmnet")[[1]]
 # level 1 dependencies of "glmnet" are:
 get_all_dependencies("glmnet", relation = c("Imports", "Depends", "LinkingTo"))[[3]]
 "glmnet" %relies% "grid"
+reverse_relies("tokenizers")[[1]]
 ```
 
 # `plot` and its handles
 
 `plot` produces a static plot from a `pkggraph` object. The available handles are:
 
-- The `nodeSize` argument might be 'in', 'out' or 'both'(default). The node size will depend on 'in' degree, 'out' degree or sum of them respectively.
-- The `background` argument can be either `black` (Default) or `white`.
+- The default: The node size is based on the number of 'in' and 'out' degree.
+
+```{R, eval = TRUE}
+pkggraph::neighborhood_graph("hash") %>%
+  plot()
+```
+
+- Let node size depend on 'in' degree alone and white 'background':
+```{R, eval = TRUE}
+pkggraph::neighborhood_graph("hash") %>%
+  plot(nodeImportance = "in", background = "white")
+```
+
+- Without variable node size and white 'background':
+```{R, eval = TRUE}
+pkggraph::neighborhood_graph("hash") %>%
+  plot(nodeImportance = "none", background = "white")
+```
 
 # `plotd3`
 
