@@ -6,7 +6,7 @@ Authors@R: c(
     person("KS", "Srikanth", email = "sri.teach@gmail.com", role = c("aut", "cre")),
     person("Singh", "Nikhil", email = "nikhilsingh2009@gmail.com", role = c("aut"))
     )
-Description: Interactively explore various dependencies of a package(s) (on CRAN like repositories) and perform analysis using tidy philosophy. Most of the functions return a 'tibble' object (enhancement of 'dataframe') which can be used for further analysis. The package offers functions to produce 'network' and 'igraph' dependency graphs. The 'plot' method produces a static plot based on 'ggnetwork' and 'plotd3' function produces an interactive D3 plot based on 'networkD3'.
+Description: Interactively explore various dependencies of a package(s) (on The Comprehensive R Archive Network like repositories) and perform analysis using tidy philosophy. Most of the functions return a 'tibble' object (enhancement of 'dataframe') which can be used for further analysis. The package offers functions to produce 'network' and 'igraph' dependency graphs. The 'plot' method produces a static plot based on 'ggnetwork' and 'plotd3' function produces an interactive D3 plot based on 'networkD3'.
 Imports:
     curl (>= 2.5),
     dplyr (>= 0.5.0),
