@@ -6,15 +6,17 @@
 #' @param height parameter to change the height of the d3 plot. Default is 500
 #' @param width parameter to change the width of the d3 plot. Default is 1000
 #' @examples
-#' pkggraph::init()
-#' plot_obj <- pkggraph::neighborhood_graph("hash")
-#' pkggraph::plotd3(plot_obj)
+#' \dontrun{
+#'   pkggraph::init()
+#'   plot_obj <- pkggraph::neighborhood_graph("hash")
+#'   pkggraph::plotd3(plot_obj)
 #'
-#' plot_obj <- pkggraph::neighborhood_graph(c("hash","tidytext"))
-#' pkggraph::plotd3(plot_obj, height = 750, width = 1200)
+#'   plot_obj <- pkggraph::neighborhood_graph(c("hash","tidytext"))
+#'   pkggraph::plotd3(plot_obj, height = 750, width = 1200)
 #'
-#' plot_obj <- pkggraph::neighborhood_graph(c("hash","Matrix"))
-#' pkggraph::plotd3(plot_obj)
+#'   plot_obj <- pkggraph::neighborhood_graph(c("hash","Matrix"))
+#'   pkggraph::plotd3(plot_obj)
+#' }
 #' @export
 plotd3 <- function(x, height = 500, width = 1000){
   stopifnot(inherits(x,"pkggraph"))

@@ -25,17 +25,20 @@ plot a pkggraph object
   to be shown. Default is FALSE}
 }
 \examples{
-pkggraph::init()
-plot_obj <- pkggraph::neighborhood_graph("hash")
-plot(plot_obj)
-plot_obj <- pkggraph::neighborhood_graph("tidytext")
-plot(plot_obj
-     , background     = "white"
-     , nodeImportance = "out")
-plot_obj <- pkggraph::neighborhood_graph(c("hash","tokenizers")
-                                         , interconnect = FALSE
-                                         )
-plot(plot_obj,  background = "white")
+\dontrun{
+  pkggraph::init()
+  plot_obj <- pkggraph::neighborhood_graph("hash")
+  plot(plot_obj)
+
+  plot_obj <- pkggraph::neighborhood_graph("tidytext")
+  plot(plot_obj
+       , background     = "white"
+       , nodeImportance = "out")
+  plot_obj <- pkggraph::neighborhood_graph(c("hash","tokenizers")
+                                           , interconnect = FALSE
+                                           )
+  plot(plot_obj,  background = "white")
+  }
 }
 \seealso{
 \code{\link{neighborhood_graph}},

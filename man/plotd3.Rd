@@ -18,15 +18,17 @@ plotd3(x, height = 500, width = 1000)
 D3 network of a pkggraph object
 }
 \examples{
-pkggraph::init()
-plot_obj <- pkggraph::neighborhood_graph("hash")
-pkggraph::plotd3(plot_obj)
+\dontrun{
+  pkggraph::init()
+  plot_obj <- pkggraph::neighborhood_graph("hash")
+  pkggraph::plotd3(plot_obj)
 
-plot_obj <- pkggraph::neighborhood_graph(c("hash","tidytext"))
-pkggraph::plotd3(plot_obj, height = 750, width = 1200)
+  plot_obj <- pkggraph::neighborhood_graph(c("hash","tidytext"))
+  pkggraph::plotd3(plot_obj, height = 750, width = 1200)
 
-plot_obj <- pkggraph::neighborhood_graph(c("hash","Matrix"))
-pkggraph::plotd3(plot_obj)
+  plot_obj <- pkggraph::neighborhood_graph(c("hash","Matrix"))
+  pkggraph::plotd3(plot_obj)
+}
 }
 \author{
 Nikhil Singh
