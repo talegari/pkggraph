@@ -1,0 +1,269 @@
+---
+title: "Vignette: pkggraph"
+author: "Srikanth KS"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    number_sections: true
+vignette: >
+  %\VignetteIndexEntry{Using pkggraph}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+abstract: The package [`pkggraph`](https://cran.r-project.org/package=pkggraph) is meant to interactively explore various dependencies of a package(s) (on CRAN like repositories) and perform analysis using [tidy](http://tidyverse.org/) philosophy. Most of the functions return a [`tibble`](https://cran.r-project.org/package=tibble) object (enhancement of `dataframe`) which can be used for further analysis. The package offers functions to produce [`network`](https://cran.r-project.org/package=network) and [`igraph`](https://cran.r-project.org/package=igraph) dependency graphs. The `plot` method produces a static plot based on [`ggnetwork`](https://cran.r-project.org/package=ggnetwork) and `plotd3` function produces an interactive D3 plot based on [`networkD3`](https://cran.r-project.org/package=networkD3).
+---
+
+# Quickstart
+
+```{R}
+suppressPackageStartupMessages(library("tidyverse"))      # for tidy data manipulations
+suppressPackageStartupMessages(library("magrittr"))       # for friendly piping
+suppressPackageStartupMessages(library("sna"))            # for plotting
+suppressPackageStartupMessages(library("statnet.common")) # for plotting
+suppressPackageStartupMessages(library("network"))        # for plotting
+suppressPackageStartupMessages(library("networkD3"))      # for plotting
+suppressPackageStartupMessages(library("igraph"))         # for graph computations
+suppressPackageStartupMessages(library("pkggraph"))       # attach the package
+suppressMessages(init())                                  # initiate the package
+```
+
+```{R, eval = TRUE }
+get_neighborhood("mlr") # a tibble, every row indicates a dependency
+# observe only 'Imports' and reverse 'Imports'
+neighborhood_graph("mlr", relation = "Imports") %>% 
+  plot()
+# observe the neighborhood of 'tidytext' package
+get_neighborhood("tidytext") %>% 
+  make_neighborhood_graph() %>% 
+  plot()
+# interact with the neighborhood of 'tm' package
+# legend does not appear in the vignette, but it appears directly
+neighborhood_graph("tm") %>% 
+  plotd3(700, 700)
+# which packages work as 'hubs' or 'authorities' in the above graph
+neighborhood_graph("tidytext", type = "igraph") %>% 
+  extract2(1) %>% 
+  authority_score() %>% 
+  extract2("vector") %>% 
+  tibble(package = names(.), score = .) %>% 
+  top_n(10, score) %>% 
+  ggplot(aes(reorder(package, score), score)) + 
+    geom_bar(stat = "identity") +
+    xlab("package") +
+    ylab("score") +
+    coord_flip()
+```
+
+# Introduction
+
+> The package `pkggraph` aims to provide a consistent and intuitive platform to explore the dependencies of packages in CRAN like repositories.
+
+The package attempts to strike a balance between two aspects:
+
+ - Understanding characteristics of the repository, at repository level (relating to 'forest')
+ - Discover relevant packages and their contribution (relating to 'trees')
+
+So that, we do not *see trees for the forest* nor *see only a forest* !
+
+# Important Features
+
+The important features  of `pkggraph` are:
+
+- Most functions return a three column `tibble` (`pkg_1`, `relation`, `pkg_2`). The first row in the table below indicates that `dplyr` package 'Imports' `assertthat` package.
+
+```{R, eval = TRUE}
+get_imports(c("dplyr", "tidyr"))
+```
+
+- There are three function families:
+    - **get** family: These functions return a `tibble`. ex: `get_reverse_depends`
+    - **neighborhood** family: These functions return a `pkggraph` object containing a `network` or a `igraph` object. ex: `neighborhood_graph`
+    - **relies** family: These functions capture recursive dependencies.
+  
+- `plot` method which uses `ggnetwork` package to generate a static plot.
+
+- `plotd3` function uses `networkD3` to produce a interactive D3 plot.
+
+The five different types of dependencies a package can have over another are: `Depends`, `Imports`, `LinkingTo`, `Suggests` and `Enhances`.
+
+# `init`
+
+Always, begin with `init()`. This creates two variables `deptable` and `packmeta` in the environment where it is called. The variables are created using local copy (Default) or computed after downloading from internet (when `local = FALSE`). It is suggested to use `init(local = FALSE)` to get up to date dependencies.
+
+```{R, eval = TRUE}
+library("pkggraph")
+init(local = FALSE)
+```
+
+The `repository` argument takes CRAN, bioconductor and omegahat repositories. For other CRAN-like repositories not listed in `repository`, an additional argument named `repos` is required.
+
+# `get` family
+
+- These functions return a `tibble`
+- All of them take `packages` as their first argument.
+- All of them take `level` argument (Default value is 1).
+
+```{R, eval = TRUE}
+get_imports("ggplot2")
+```
+
+Lets observe packages that 'Suggest' `knitr`.
+
+```{R, eval = TRUE}
+get_reverse_suggests("knitr", level = 1)
+```
+
+By setting `level = 2`, observe that packages from first level (first column of the previous table) and their suggestors are captured.
+
+```{R}
+get_reverse_suggests("knitr", level = 2)
+```
+
+> What if we required to capture dependencies of more than one type, say both `Depends` and `Imports`?
+
+## `get_all_dependencies` and `get_all_reverse_dependencies`
+
+These functions capture direct and reverse dependencies until the suggested level for any subset of dependency type.
+
+```{R}
+get_all_dependencies("mlr", relation = c("Depends", "Imports"))
+get_all_dependencies("mlr", relation = c("Depends", "Imports"), level = 2)
+```
+
+Observe that `ada` 'Depends' on `rpart`.
+
+Sometimes, we would like to capture only specified dependencies recursively. In this case, at second level, say we would like to capture only 'Depends'  and 'Imports' of packages which were dependents/imports of `mlr`. Then, set `strict = TRUE`.
+
+```{R, eval = TRUE}
+get_all_dependencies("mlr"
+                     , relation = c("Depends", "Imports")
+                     , level    = 2
+                     , strict   = TRUE)
+```
+
+Notice that `ada` was 'Suggest'ed by `mlr`. That is why, it appeared when `strict` was `FALSE`(default).
+
+> What if we required to capture both dependencies and reverse dependencies until a specified level?
+
+## `get_neighborhood`
+
+This function captures both dependencies and reverse dependencies until a specified level for a given subset of dependency type.
+
+```{R, eval = TRUE }
+get_neighborhood("hash", level = 2)
+get_neighborhood("hash", level = 2) %>% 
+  make_neighborhood_graph %>% 
+  plot()
+```
+
+Observe that `testthat` family appears due to `Suggests`. Lets look at `Depends` and `Imports` only:
+
+```{R, eval = TRUE }
+get_neighborhood("hash"
+                 , level = 2
+                 , relation = c("Imports", "Depends")
+                 , strict = TRUE) %>% 
+  make_neighborhood_graph %>% 
+  plot()
+```
+
+Observe that the graph below captures the fact: `parallelMap` 'Imports' `BBmisc`
+
+```{R, eval = TRUE }
+get_neighborhood("mlr", relation = "Imports") %>% 
+  make_neighborhood_graph() %>% 
+  plot()
+```
+
+`get_neighborhood` looks if any packages until the specified level have a dependency on each other at one level higher. This can be done turned off by setting `interconnect = FALSE`.
+
+```{R, eval = TRUE }
+get_neighborhood("mlr", relation = "Imports", interconnect = FALSE) %>% 
+  make_neighborhood_graph() %>% 
+  plot()
+```
+
+# `neighborhood_graph` and `make_neighborhood_graph`
+
+`neighborhood_graph` creates a graph object of a set of packages of class `pkggraph`. This takes same arguments as `get_neighborhood` and additionally `type`. Argument `type` defaults to `igraph`. The alternative is `network`.
+
+```{R, eval = TRUE }
+neighborhood_graph("caret", relation = "Imports") %>% 
+  plot()
+```
+
+`make_neighborhood_graph` accepts the output of any `get_*` as input and produces a graph object.
+
+> Essentially, you can get the information from `get_` function after some trial and error, then create a graph object for further analysis or plotting.
+
+```{R, eval = TRUE}
+get_all_reverse_dependencies("rpart", relation = "Imports") %>% 
+make_neighborhood_graph() %>% 
+  plot()
+```
+
+# Checking dependencies and `relies`
+
+For quick dependency checks, one could use infix operators: `%depends%`, `%imports%`, `%linkingto%`, `%suggests%`, `%enhances%`.
+
+```{R, eval = TRUE}
+"dplyr" %imports% "tibble"
+```
+
+A package `A` is said to *rely* on package `B` if `A` either 'Depends', 'Imports' or 'LinkingTo' `B`, *recursively*. `relies` function captures this.
+
+```{R, eval = TRUE}
+relies("glmnet")[[1]]
+# level 1 dependencies of "glmnet" are:
+get_all_dependencies("glmnet", relation = c("Imports", "Depends", "LinkingTo"))[[3]]
+"glmnet" %relies% "grid"
+```
+
+# `plot` and its handles
+
+`plot` produces a static plot from a `pkggraph` object.
+
+The following examples plot graphs with different handles:
+
+- The default: The node size is based on the number of 'in' and 'out' degree.
+
+```{R, eval = TRUE}
+pkggraph::neighborhood_graph("hash") %>%
+  plot()
+```
+
+- Let node size depend on 'in' degree alone and white 'background':
+```{R, eval = TRUE}
+pkggraph::neighborhood_graph("hash") %>%
+  plot(nodeImportance = "in", background = "white")
+```
+
+- Without variable node size and white 'background':
+```{R, eval = TRUE}
+pkggraph::neighborhood_graph("hash") %>%
+  plot(nodeImportance = "none", background = "white")
+```
+
+# `plotd3`
+
+For interactive exploration of large graphs, `plotd3` might be better than static plots. Note that,
+
+- By holding the mouse over a vertex, highlights all related nodes and edges.
+- By clicking a vertex and dragging it, changes the way graph looks and gives a better view of related 'cluster'.
+
+```{R, eval = TRUE}
+# legend does not appear in the vignette, but it appears directly
+plotd3(neighborhood_graph("tibble"), height = 1000, width = 1000)
+```
+
+# Acknowledgement
+
+> Package authors Srikanth KS and Nikhil Singh would like to thank `R` core, Hadley Wickham for tidyverse framework and the fantastic `R` community! 
+
+- Please write to the maintainer (gmail at sri.teach) for suggesting new ideas!
+- Bug reports go here: ....
+
+----

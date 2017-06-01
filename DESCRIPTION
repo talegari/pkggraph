@@ -1,0 +1,38 @@
+Package: pkggraph
+Type: Package
+Title: A Consistent and Intuitive Platform to Explore the Dependencies of Packages on CRAN like Repositories
+Version: 0.2.0
+Authors@R: c(
+    person("KS", "Srikanth", email = "sri.teach@gmail.com", role = c("aut", "cre")),
+    person("Singh", "Nikhil", email = "nikhilsingh2009@gmail.com", role = c("aut"))
+    )
+Description: The package is meant to interactively explore various dependencies of a package(s) (on CRAN like repositories) and perform analysis using tidy philosophy. Most of the functions return a 'tibble' object (enhancement of 'dataframe') which can be used for further analysis. The package offers functions to produce 'network' and 'igraph' dependency graphs. The 'plot' method produces a static plot based on 'ggnetwork' and 'plotd3' function produces an interactive D3 plot based on 'networkD3'.
+Imports:
+    curl (>= 2.5),
+    dplyr (>= 0.5.0),
+    htmltools (>= 0.3.5), 
+    igraph (>= 1.0.1),
+    intergraph (>= 2.0.2),
+    Matrix (>= 1.2.10),
+    networkD3 (>= 0.4),
+    network (>= 1.13.0),
+    RColorBrewer (>= 1.1.2),
+    tibble (>= 1.3.0),
+    tools (>= 3.4.0),
+    utils (>= 3.4.0)
+Depends:
+    R (>= 3.4.0),
+    ggnetwork (>= 0.5.1),
+    ggplot2 (>= 2.2.1)
+License: GPL-3
+Encoding: UTF-8
+RoxygenNote: 6.0.1
+Suggests:
+    knitr (>= 1.15.1),
+    rmarkdown (>= 1.4),
+    magrittr (>= 1.5),
+    sna (>= 2.4),
+    statnet.common (>= 3.3.0),
+    tidyverse (>= 1.1.1),
+    BiocInstaller (>= 1.24.0)
+VignetteBuilder: knitr

@@ -1,0 +1,2 @@
+- 0.2.0:
+    - known issue with legend not appearning in knitr output
