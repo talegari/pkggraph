@@ -1,6 +1,6 @@
 Package: pkggraph
 Type: Package
-Title: A Consistent and Intuitive Platform to Explore the Dependencies of Packages on CRAN Like Repositories
+Title: A Consistent and Intuitive Platform to Explore the Dependencies of Packages on The Comprehensive R Archive Network Like Repositories
 Version: 0.2.0
 Authors@R: c(
     person("KS", "Srikanth", email = "sri.teach@gmail.com", role = c("aut", "cre")),
