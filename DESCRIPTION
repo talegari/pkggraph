@@ -1,7 +1,7 @@
 Package: pkggraph
 Type: Package
 Title: A Consistent and Intuitive Platform to Explore the Dependencies of Packages on the Comprehensive R Archive Network Like Repositories
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(
     person("KS", "Srikanth", email = "sri.teach@gmail.com", role = c("aut", "cre")),
     person("Singh", "Nikhil", email = "nikhilsingh2009@gmail.com", role = c("aut"))
