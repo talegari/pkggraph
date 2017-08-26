@@ -29,11 +29,9 @@
 #'   plot(plot_obj,  background = "white")
 #'   }
 #' @export
-plot <- function(x, ...){
-  UseMethod("plot")
-}
-
-#' @export
+# plot <- function(x, ...){
+#   UseMethod("plot")
+# }
 plot.pkggraph <- function(x, ...) {
 
   graph_object <- x[[1]]
@@ -42,6 +40,11 @@ plot.pkggraph <- function(x, ...) {
     network_object <- intergraph::asNetwork(graph_object)
   } else {
     network_object <- graph_object
+  }
+
+  # check if graph is empty
+  if(network::network.size(network_object) == 0){
+    stop("Graph is empty.")
   }
 
   arg_list        <- list(...)
