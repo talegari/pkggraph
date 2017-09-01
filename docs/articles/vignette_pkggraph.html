@@ -29,10 +29,25 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="..//index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../articles/vignette_pkggraph.html">vignette_pkggraph</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -60,7 +75,7 @@
       <h1>vignette_pkggraph</h1>
                         <h4 class="author">Srikanth KS</h4>
             
-            <h4 class="date">2017-06-06</h4>
+            <h4 class="date">2017-09-02</h4>
           </div>
 
     
@@ -75,13 +90,13 @@
 <a href="#quickstart" class="anchor"></a>Quickstart</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"tidyverse"</span>))      <span class="co"># for tidy data manipulations</span>
 <span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"magrittr"</span>))       <span class="co"># for friendly piping</span>
+<span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"network"</span>))        <span class="co"># for plotting</span>
 <span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"sna"</span>))            <span class="co"># for plotting</span>
 <span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"statnet.common"</span>)) <span class="co"># for plotting</span>
-<span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"network"</span>))        <span class="co"># for plotting</span>
 <span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"networkD3"</span>))      <span class="co"># for plotting</span>
 <span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"igraph"</span>))         <span class="co"># for graph computations</span>
 <span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(<span class="st">"pkggraph"</span>))       <span class="co"># attach the package</span>
-<span class="kw">suppressMessages</span>(<span class="kw"><a href="../reference/init.html">init</a></span>())                                  <span class="co"># initiate the package</span></code></pre></div>
+<span class="kw">suppressMessages</span>(<span class="kw"><a href="../reference/init.html">init</a></span>(<span class="dt">local =</span> <span class="ot">TRUE</span>))                      <span class="co"># initiate the package</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/get_neighborhood.html">get_neighborhood</a></span>(<span class="st">"mlr"</span>) <span class="co"># a tibble, every row indicates a dependency</span></code></pre></div>
 <pre><code>## # A tibble: 442 x 3
 ##          pkg_1 relation        pkg_2
@@ -99,12 +114,12 @@
 ## # ... with 432 more rows</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># observe only 'Imports' and reverse 'Imports'</span>
 <span class="kw"><a href="../reference/neighborhood_graph.html">neighborhood_graph</a></span>(<span class="st">"mlr"</span>, <span class="dt">relation =</span> <span class="st">"Imports"</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/plot.html">plot</a></span>()</code></pre></div>
+<span class="st">  </span><span class="kw">plot</span>()</code></pre></div>
 <p><img src="vignette_pkggraph_files/figure-html/unnamed-chunk-2-1.png" width="672"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># observe the neighborhood of 'tidytext' package</span>
 <span class="kw"><a href="../reference/get_neighborhood.html">get_neighborhood</a></span>(<span class="st">"tidytext"</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/make_neighborhood_graph.html">make_neighborhood_graph</a></span>() %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/plot.html">plot</a></span>()</code></pre></div>
+<span class="st">  </span><span class="kw">plot</span>()</code></pre></div>
 <p><img src="vignette_pkggraph_files/figure-html/unnamed-chunk-2-2.png" width="672"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># interact with the neighborhood of 'tm' package</span>
 <span class="co"># legend does not appear in the vignette, but it appears directly</span>
@@ -113,9 +128,9 @@
 <div id="htmlwidget-dc703e12195084a968e9" style="width:700px;height:700px;" class="forceNetwork html-widget"></div>
 <script type="application/json" data-for="htmlwidget-dc703e12195084a968e9">{"x":{"links":{"source":[0,0,1,1,2,3,3,4,5,5,5,6,7,8,8,9,9,10,11,12,12,12,13,13,1,14,14,14,15,15,16,16,17,17,18,18,18,18,19,19,19,19,20,20,20,4,21,22,23,23,24,24,25,25,25,26,26,26,26,26,26,27,27,27,27,28,28,29,6,6,30,30,30,31,32,33,33,33,34,34,34,35,35,36,36,36,36,36,9,9,9,9,9,37,37,37,10,10,10,10,38,38,11,11,39,39,39,40,40,40,41,41,41,42,42,43,43,43,44,44,45,45,46,47,47,48,49,49,20,4,27,33,36,37,10,10,47,48,50,50,51,51,2,21,21,24,52,26,26,27,27,27,53,53,53,53,5,5,5,5,5,6,54,33,33,33,33,55,37,56,56,56,56,56,56,10,10,10,10,10,10,10,11,44,45,45,46,47,48,54],"target":[10,26,10,47,57,58,10,10,10,58,59,10,10,33,10,10,58,58,10,58,10,59,58,10,57,10,60,47,54,10,47,10,10,61,27,59,57,10,47,10,57,61,57,10,62,62,59,10,10,55,59,10,60,47,10,58,61,10,63,47,60,57,47,62,60,60,10,10,59,47,10,4,55,10,10,59,27,62,33,10,57,10,47,61,45,10,57,62,47,51,45,59,57,10,58,62,62,61,59,63,58,10,58,59,58,10,60,58,10,60,58,10,60,58,10,58,10,60,47,59,59,10,60,59,62,62,10,59,62,62,62,62,62,62,64,62,62,62,10,58,10,57,10,10,57,61,10,51,57,45,10,59,57,10,60,65,57,40,41,39,38,30,60,57,10,47,58,10,57,60,10,47,45,27,58,66,67,65,68,57,69,60,60,10,57,60,10,10,10,10],"value":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,2],"colour":["#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#1B00FF","#4DAF4A","#4DAF4A","#4DAF4A","#4DAF4A","#4DAF4A","#4DAF4A","#4DAF4A","#4DAF4A","#4DAF4A","#4DAF4A","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#FF7F00"]},"nodes":{"name":["ANLP","DeducerText","lsa","manifestoR","maxent","RcmdrPlugin.temis","RNewsflow","smdc","stmgui","textmining","tm","tm.plugin.dc","chinese.misc","CSeqpat","edgar","fulltext","gcite","genderizeR","gofastr","inpdfr","lexRankr","movMF","neuropsychology","ngramrr","polmineR","PubMedWordcloud","qdap","quanteda","rClinicalCodes","RKEA","RTextTools","scientoText","SocialMediaLab","stm","stmCorrViz","TELP","textmineR","textreg","tm.plugin.alceste","tm.plugin.europresse","tm.plugin.factiva","tm.plugin.lexisnexis","tm.plugin.mail","tm.plugin.webmining","toaster","topicmodels","vkR","wordcloud","wordspace","Xplortext","iemisctext","koRpus","PRISMA","rattle","rplos","tau","tidytext","SnowballC","NLP","slam","XML","parallel","Rcpp","tools","BH","Rgraphviz","filehash","Rcampdf","Rpoppler","tm.lexicon.GeneralInquirer"],"group":[6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6],"nodesize":[6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6]},"options":{"NodeID":"nName","Group":"group","colourScale":"d3.scaleOrdinal().range([\"#000000\"]);","fontSize":7,"fontFamily":"serif","clickTextSize":17.5,"linkDistance":50,"linkWidth":"function(d) { return Math.sqrt(d.value); }","charge":-250,"opacity":1,"zoom":true,"legend":false,"arrows":true,"nodesize":true,"radiusCalculation":"5","bounded":true,"opacityNoHover":1,"clickAction":" d3.select(this).select(\"circle\")\n  .transition().duration(750).attr(\"r\", 20)"}},"evals":[],"jsHooks":[]}</script><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># which packages work as 'hubs' or 'authorities' in the above graph</span>
 <span class="kw"><a href="../reference/neighborhood_graph.html">neighborhood_graph</a></span>(<span class="st">"tidytext"</span>, <span class="dt">type =</span> <span class="st">"igraph"</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">extract2</span>(<span class="dv">1</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">authority_score</span>() %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">extract2</span>(<span class="st">"vector"</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magrittr/topics/aliases">extract2</a></span>(<span class="dv">1</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/igraph/topics/authority_score">authority_score</a></span>() %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/magrittr/topics/aliases">extract2</a></span>(<span class="st">"vector"</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">tibble</span>(<span class="dt">package =</span> <span class="kw">names</span>(.), <span class="dt">score =</span> .) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">top_n</span>(<span class="dv">10</span>, score) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">reorder</span>(package, score), score)) +<span class="st"> </span>
@@ -185,7 +200,7 @@
 <h1 class="hasAnchor">
 <a href="#init" class="anchor"></a><code>init</code>
 </h1>
-<p>Always, begin with <code><a href="../reference/init.html">init()</a></code>. This creates two variables <code>deptable</code> and <code>packmeta</code> in the environment where it is called. The variables are created using local copy (Default) or computed after downloading from internet (when <code>local = FALSE</code>). It is suggested to use <code><a href="../reference/init.html">init(local = FALSE)</a></code> to get up to date dependencies.</p>
+<p>Always, begin with <code><a href="../reference/init.html">init()</a></code>. This creates two variables <code>deptable</code> and <code>packmeta</code> in the environment where it is called. The variables are created using local copy or computed after downloading from internet (when <code>local = FALSE</code>, the default value). It is suggested to use <code><a href="../reference/init.html">init(local = FALSE)</a></code> to get up to date dependencies.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"pkggraph"</span>)
 <span class="kw"><a href="../reference/init.html">init</a></span>(<span class="dt">local =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p>The <code>repository</code> argument takes CRAN, bioconductor and omegahat repositories. For other CRAN-like repositories not listed in <code>repository</code>, an additional argument named <code>repos</code> is required.</p>
@@ -328,7 +343,7 @@
 ## # ... with 50 more rows</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/get_neighborhood.html">get_neighborhood</a></span>(<span class="st">"hash"</span>, <span class="dt">level =</span> <span class="dv">2</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span>make_neighborhood_graph %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/plot.html">plot</a></span>()</code></pre></div>
+<span class="st">  </span><span class="kw">plot</span>()</code></pre></div>
 <p><img src="vignette_pkggraph_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 <p>Observe that <code>testthat</code> family appears due to <code>Suggests</code>. Lets look at <code>Depends</code> and <code>Imports</code> only:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/get_neighborhood.html">get_neighborhood</a></span>(<span class="st">"hash"</span>
@@ -336,17 +351,17 @@
                  , <span class="dt">relation =</span> <span class="kw">c</span>(<span class="st">"Imports"</span>, <span class="st">"Depends"</span>)
                  , <span class="dt">strict =</span> <span class="ot">TRUE</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span>make_neighborhood_graph %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/plot.html">plot</a></span>()</code></pre></div>
+<span class="st">  </span><span class="kw">plot</span>()</code></pre></div>
 <p><img src="vignette_pkggraph_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
 <p>Observe that the graph below captures the fact: <code>parallelMap</code> ‘Imports’ <code>BBmisc</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/get_neighborhood.html">get_neighborhood</a></span>(<span class="st">"mlr"</span>, <span class="dt">relation =</span> <span class="st">"Imports"</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/make_neighborhood_graph.html">make_neighborhood_graph</a></span>() %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/plot.html">plot</a></span>()</code></pre></div>
+<span class="st">  </span><span class="kw">plot</span>()</code></pre></div>
 <p><img src="vignette_pkggraph_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
 <p><code>get_neighborhood</code> looks if any packages until the specified level have a dependency on each other at one level higher. This can be done turned off by setting <code>interconnect = FALSE</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/get_neighborhood.html">get_neighborhood</a></span>(<span class="st">"mlr"</span>, <span class="dt">relation =</span> <span class="st">"Imports"</span>, <span class="dt">interconnect =</span> <span class="ot">FALSE</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/make_neighborhood_graph.html">make_neighborhood_graph</a></span>() %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/plot.html">plot</a></span>()</code></pre></div>
+<span class="st">  </span><span class="kw">plot</span>()</code></pre></div>
 <p><img src="vignette_pkggraph_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
 </div>
 </div>
@@ -359,7 +374,7 @@
 <code>neighborhood_graph</code> creates a graph object of a set of packages of class <code>pkggraph</code>. This takes same arguments as <code>get_neighborhood</code> and additionally <code>type</code>. Argument <code>type</code> defaults to <code>igraph</code>. The alternative is <code>network</code>.</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/neighborhood_graph.html">neighborhood_graph</a></span>(<span class="st">"caret"</span>, <span class="dt">relation =</span> <span class="st">"Imports"</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/plot.html">plot</a></span>()</code></pre></div>
+<span class="st">  </span><span class="kw">plot</span>()</code></pre></div>
 <p><img src="vignette_pkggraph_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
 <p><code>make_neighborhood_graph</code> accepts the output of any <code>get_*</code> as input and produces a graph object.</p>
 <blockquote>
@@ -367,7 +382,7 @@
 </blockquote>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/get_all_reverse_dependencies.html">get_all_reverse_dependencies</a></span>(<span class="st">"rpart"</span>, <span class="dt">relation =</span> <span class="st">"Imports"</span>) %&gt;%<span class="st"> </span>
 <span class="kw"><a href="../reference/make_neighborhood_graph.html">make_neighborhood_graph</a></span>() %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/plot.html">plot</a></span>()</code></pre></div>
+<span class="st">  </span><span class="kw">plot</span>()</code></pre></div>
 <p><img src="vignette_pkggraph_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
 </div>
 <div id="checking-dependencies-and-relies" class="section level1">
@@ -398,19 +413,19 @@
 <li>The default: The node size is based on the number of ‘in’ and ‘out’ degree.</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pkggraph::<span class="kw"><a href="../reference/neighborhood_graph.html">neighborhood_graph</a></span>(<span class="st">"hash"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/plot.html">plot</a></span>()</code></pre></div>
+<span class="st">  </span><span class="kw">plot</span>()</code></pre></div>
 <p><img src="vignette_pkggraph_files/figure-html/unnamed-chunk-18-1.png" width="672"></p>
 <ul>
 <li>Let node size depend on ‘in’ degree alone and white ‘background’:</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pkggraph::<span class="kw"><a href="../reference/neighborhood_graph.html">neighborhood_graph</a></span>(<span class="st">"hash"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/plot.html">plot</a></span>(<span class="dt">nodeImportance =</span> <span class="st">"in"</span>, <span class="dt">background =</span> <span class="st">"white"</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">plot</span>(<span class="dt">nodeImportance =</span> <span class="st">"in"</span>, <span class="dt">background =</span> <span class="st">"white"</span>)</code></pre></div>
 <p><img src="vignette_pkggraph_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
 <ul>
 <li>Without variable node size and white ‘background’:</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pkggraph::<span class="kw"><a href="../reference/neighborhood_graph.html">neighborhood_graph</a></span>(<span class="st">"hash"</span>) %&gt;%
-<span class="st">  </span><span class="kw"><a href="../reference/plot.html">plot</a></span>(<span class="dt">nodeImportance =</span> <span class="st">"none"</span>, <span class="dt">background =</span> <span class="st">"white"</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">plot</span>(<span class="dt">nodeImportance =</span> <span class="st">"none"</span>, <span class="dt">background =</span> <span class="st">"white"</span>)</code></pre></div>
 <p><img src="vignette_pkggraph_files/figure-html/unnamed-chunk-20-1.png" width="672"></p>
 </div>
 <div id="plotd3" class="section level1">
@@ -445,7 +460,8 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#quickstart">Quickstart</a></li>
       <li><a href="#introduction">Introduction</a></li>
