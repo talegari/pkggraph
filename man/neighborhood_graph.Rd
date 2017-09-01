@@ -38,7 +38,7 @@ Obtain a network or igraph graph object of dependencies and
 }
 \examples{
 # explore first level dependencies
-pkggraph::init()
+pkggraph::init(local = TRUE)
 pkggraph::neighborhood_graph("caret")
 
 # explore second level dependencies of class network

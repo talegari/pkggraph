@@ -22,7 +22,7 @@ Make a network or igraph graph object of dependencies and
   `get_neighborhood`, `get_all_dependents`etc
 }
 \examples{
-pkggraph::init()
+pkggraph::init(local = TRUE)
 graph_object <- pkggraph::get_neighborhood("caret")
 pkggraph::make_neighborhood_graph(graph_object)
 }

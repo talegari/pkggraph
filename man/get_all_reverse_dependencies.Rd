@@ -30,7 +30,7 @@ A tibble with three columns: `pkg_1`, `relation` and `pkg_2`
 Get all reverse dependencies
 }
 \examples{
-pkggraph::init()
+pkggraph::init(local = TRUE)
 # general use
 pkggraph::get_all_reverse_dependencies("mlr")
 # specify two levels

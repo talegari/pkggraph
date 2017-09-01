@@ -18,7 +18,7 @@ pkg_1 \%relies\% pkg_2
 Check whether a package has a recursive dependency on the other
 }
 \examples{
-pkggraph::init()
+pkggraph::init(local = TRUE)
 "dplyr" \%relies\% "tibble"
 }
 \seealso{

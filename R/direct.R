@@ -9,7 +9,7 @@
 #'   \code{\link{get_enhances}}, \code{\link{get_all_dependencies}},
 #'   \code{\link{get_reverse_depends}}
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' pkggraph::get_depends("glmnet")
 #' @export
 get_depends <- function(packages, level = 1L){
@@ -30,7 +30,7 @@ get_depends <- function(packages, level = 1L){
 #'   \code{\link{get_enhances}}, \code{\link{get_all_dependencies}},
 #'   \code{\link{get_reverse_imports}}
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' pkggraph::get_imports("dplyr")
 #' @export
 get_imports <- function(packages, level = 1L){
@@ -51,7 +51,7 @@ get_imports <- function(packages, level = 1L){
 #'   \code{\link{get_enhances}}, \code{\link{get_all_dependencies}},
 #'   \code{\link{get_reverse_linkingto}}
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' pkggraph::get_linkingto("tibble")
 #' @export
 get_linkingto <- function(packages, level = 1L){
@@ -72,7 +72,7 @@ get_linkingto <- function(packages, level = 1L){
 #'   \code{\link{get_enhances}}, \code{\link{get_all_dependencies}},
 #'   \code{\link{get_reverse_suggests}}
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' pkggraph::get_suggests("knitr")
 #' @export
 get_suggests <- function(packages, level = 1L){
@@ -93,7 +93,7 @@ get_suggests <- function(packages, level = 1L){
 #'   \code{\link{get_enhances}}, \code{\link{get_all_dependencies}},
 #'   \code{\link{get_reverse_enhances}}
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' pkggraph::get_enhances("bigmemory")
 #' @export
 get_enhances <- function(packages, level = 1L){
@@ -117,7 +117,7 @@ get_enhances <- function(packages, level = 1L){
 #' @return A tibble with three columns: `pkg_1`, `relation` and `pkg_2`
 #' @seealso \code{\link{get_all_reverse_dependencies}}
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' # general use
 #' pkggraph::get_all_dependencies("mlr")
 #' # specify two levels
@@ -149,7 +149,7 @@ get_all_dependencies <- function(packages
                                  ){
   # assertions ----
   if(!exists("deptable")){
-    stop("Unable to find `deptable`. Please run `pkggraph::init()`.")
+    stop("Unable to find `deptable`. Please run `pkggraph::init(local = TRUE)`.")
   }
   stopifnot(is.character(packages) && length(packages) > 0)
   stopifnot(length(level) == 1 &&

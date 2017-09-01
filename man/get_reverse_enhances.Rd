@@ -18,7 +18,7 @@ A tibble with three columns: `pkg_1`, `relation` and `pkg_2`
 Get reverse dependencies
 }
 \examples{
-pkggraph::init()
+pkggraph::init(local = TRUE)
 pkggraph::get_reverse_enhances("synchronicity")
 }
 \seealso{

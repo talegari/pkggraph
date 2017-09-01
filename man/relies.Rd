@@ -19,7 +19,7 @@ Captures recursive dependencies of these types: "Depends",
   "Imports", "LinkingTo"
 }
 \examples{
-pkggraph::init()
+pkggraph::init(local = TRUE)
 pkggraph::relies("tidytext")
 }
 \seealso{

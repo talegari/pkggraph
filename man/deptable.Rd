@@ -4,7 +4,7 @@
 \name{deptable}
 \alias{deptable}
 \title{deptable}
-\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 55699 rows and 3 columns.}
+\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 61154 rows and 3 columns.}
 \usage{
 deptable
 }

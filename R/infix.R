@@ -5,7 +5,7 @@
 #' @param pkg_2 a package name
 #' @return TRUE or FALSE
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' "dplyr" %depends% "tibble"
 #' @export
 
@@ -26,7 +26,7 @@
 #' @param pkg_2 a package name
 #' @return TRUE or FALSE
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' "dplyr" %imports% "tibble"
 #' @export
 
@@ -47,7 +47,7 @@
 #' @param pkg_2 a package name
 #' @return TRUE or FALSE
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' "dplyr" %linkingto% "tibble"
 #' @export
 
@@ -68,7 +68,7 @@
 #' @param pkg_2 a package name
 #' @return TRUE or FALSE
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' "dplyr" %suggests% "tibble"
 #' @export
 
@@ -89,7 +89,7 @@
 #' @param pkg_2 a package name
 #' @return TRUE or FALSE
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' "dplyr" %enhances% "tibble"
 #' @export
 
@@ -111,7 +111,7 @@
 #' @return (flag) TRUE, if 'pkg_1' `relies` on 'pkg_2'
 #' @seealso \code{\link{relies}}, \code{\link{reverse_relies}}
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' "dplyr" %relies% "tibble"
 #' @export
 `%relies%` <- function(pkg_1, pkg_2){

@@ -15,7 +15,7 @@
 #'   to be shown. Default is FALSE}
 #' @examples
 #' \dontrun{
-#'   pkggraph::init()
+#'   pkggraph::init(local = TRUE)
 #'   plot_obj <- pkggraph::neighborhood_graph("hash")
 #'   plot(plot_obj)
 #'

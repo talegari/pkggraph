@@ -4,13 +4,13 @@
 \alias{init}
 \title{init}
 \usage{
-init(local = TRUE, repository = "CRAN", ...)
+init(local = FALSE, repository = "CRAN", ...)
 }
 \arguments{
-\item{local}{(flag, default: TRUE) If \itemize{ \item FALSE: Tries to to
+\item{local}{(flag, default: FALSE) If \itemize{ \item FALSE: Tries to to
 download package data from CRAN over internet and compute dependencies
-\item TRUE: Loads data that comes with the package corresponding to 1st
-June 2017 17:14 IST}}
+\item TRUE: Loads data that comes with the package corresponding to 2nd
+September 2017 02:04 IST}}
 
 \item{repository}{(character vector, Default: "CRAN") One among c("CRAN",
 "BioCsoft", "BioCann", "BioCexp", "BioCextra", "omegahat"). To use a

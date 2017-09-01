@@ -17,7 +17,7 @@
 #'   \code{\link{make_neighborhood_graph}}
 #' @examples
 #' # explore first level dependencies
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' pkggraph::get_neighborhood("caret")
 #'
 #' # explore second level dependencies
@@ -132,7 +132,7 @@ get_neighborhood <- function(packages
 #'   \code{\link{make_neighborhood_graph}}
 #' @examples
 #' # explore first level dependencies
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' pkggraph::neighborhood_graph("caret")
 #'
 #' # explore second level dependencies of class network
@@ -217,7 +217,7 @@ neighborhood_graph <- function(packages
 #' @seealso \code{\link{neighborhood_graph}},
 #'   \code{\link{get_neighborhood}}
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' graph_object <- pkggraph::get_neighborhood("caret")
 #' pkggraph::make_neighborhood_graph(graph_object)
 #' @export

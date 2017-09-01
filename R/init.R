@@ -4,10 +4,10 @@
 #'   should be done as soon as the package is loaded or attached. This
 #'   creates(rewrites) new variables 'deptable' and 'packmeta' to the
 #'   environment where it is run from.
-#' @param local (flag, default: TRUE) If \itemize{ \item FALSE: Tries to to
+#' @param local (flag, default: FALSE) If \itemize{ \item FALSE: Tries to to
 #'   download package data from CRAN over internet and compute dependencies
-#'   \item TRUE: Loads data that comes with the package corresponding to 1st
-#'   June 2017 17:14 IST}
+#'   \item TRUE: Loads data that comes with the package corresponding to 2nd
+#'   September 2017 02:04 IST}
 #' @param repository (character vector, Default: "CRAN") One among c("CRAN",
 #'   "BioCsoft", "BioCann", "BioCexp", "BioCextra", "omegahat"). To use a
 #'   repository not in this list, set 'repository' to NULL and pass named
@@ -17,7 +17,7 @@
 #' @return An invisible TRUE
 #' @export
 
-init <- function(local        = TRUE
+init <- function(local        = FALSE
                  , repository = "CRAN"
                  , ...){
   # assertions               ----
@@ -91,52 +91,39 @@ init <- function(local        = TRUE
   # compute dependency table ----
   if(!local){
     message("Computing package dependencies ...")
-
-    # function to convert list to df
-    # where list is one package output of `package_dependencies`
-    to_df <- function(alist
-                      , type){
-      if(!identical(alist[[1]], character(0))){
-
-        tibble::tibble(pkg_1      = names(alist)
-                       , relation = type
-                       , pkg_2    = alist[[1]])
-
-      } else {
-        NULL
-      }
-    }
-
     types <- c("Depends"
                , "Imports"
                , "LinkingTo"
                , "Suggests"
                , "Enhances")
 
-    # function to create dependence tibble for a package
-    all_dep_package <- function(package_name){
+    # dependency DT for each relation
+    typed_df = function(string){
 
-      dep_list <-
-        lapply(types
-               , function(x){
-                 to_df(
-                   tools::package_dependencies(packages   = package_name
-                                              , db        = packmeta
-                                              , which     = x
-                                              , verbose   = FALSE)
-                   , x)
-               })
+      df = strsplit(packmeta[,string], split = ",")
+      df = lapply(df, function(y) gsub("\\([^()]*\\)", "", y))
+      df = lapply(df, trimws)
+      df = plyr::ldply(df, data.table)
 
-      dplyr::bind_rows(dep_list)
+      setDT(df)
+      setnames(df, colnames(df), c("pkg_1", "pkg_2"))
+      rfree = df$pkg_2 != "R" & !is.na(df$pkg_2)
+      df = df[rfree,][, ("relation") := string]
+      setcolorder(df, c("pkg_1", "relation", "pkg_2"))
+
+      return(df)
     }
 
+
     # create a long tibble
-    deptable <- dplyr::bind_rows(lapply(rownames(packmeta), all_dep_package))
+    deptable <- rbindlist(lapply(types, typed_df))
 
     # set factor levels for relation
-    deptable[["relation"]] <- factor(deptable[["relation"]]
-                                , levels = types)
+    relation = NULL
+    deptable[, ("relation") := factor(relation, levels = types)]
 
+    # convert to tibble
+    deptable = tibble::as_tibble(deptable)
 
     # assign to parent frame
     assign("deptable"

@@ -20,7 +20,7 @@ Captures reverse recursive dependencies of these types:
   "Depends", "Imports", "LinkingTo"
 }
 \examples{
-pkggraph::init()
+pkggraph::init(local = TRUE)
 pkggraph::reverse_relies("data.table")
 }
 \seealso{

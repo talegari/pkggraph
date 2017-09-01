@@ -27,7 +27,7 @@ suppressPackageStartupMessages(library("statnet.common")) # for plotting
 suppressPackageStartupMessages(library("networkD3"))      # for plotting
 suppressPackageStartupMessages(library("igraph"))         # for graph computations
 suppressPackageStartupMessages(library("pkggraph"))       # attach the package
-suppressMessages(init())                                  # initiate the package
+suppressMessages(init(local = TRUE))                      # initiate the package
 ```
 
 ```{R, eval = TRUE }
@@ -91,7 +91,7 @@ The five different types of dependencies a package can have over another are: `D
 
 # `init`
 
-Always, begin with `init()`. This creates two variables `deptable` and `packmeta` in the environment where it is called. The variables are created using local copy (Default) or computed after downloading from internet (when `local = FALSE`). It is suggested to use `init(local = FALSE)` to get up to date dependencies.
+Always, begin with `init()`. This creates two variables `deptable` and `packmeta` in the environment where it is called. The variables are created using local copy or computed after downloading from internet (when `local = FALSE`, the default value). It is suggested to use `init(local = FALSE)` to get up to date dependencies.
 
 ```{R, eval = FALSE}
 library("pkggraph")

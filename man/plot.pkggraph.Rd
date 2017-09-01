@@ -26,7 +26,7 @@ plot a pkggraph object
 }
 \examples{
 \dontrun{
-  pkggraph::init()
+  pkggraph::init(local = TRUE)
   plot_obj <- pkggraph::neighborhood_graph("hash")
   plot(plot_obj)
 

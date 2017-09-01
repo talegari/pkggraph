@@ -27,6 +27,8 @@
 #' @importFrom networkD3 forceNetwork
 #' @importFrom Matrix colSums
 #' @importFrom Matrix rowSums
+#' @importFrom plyr ldply
 #' @import ggplot2
 #' @import ggnetwork
+#' @import data.table
 "_PACKAGE"

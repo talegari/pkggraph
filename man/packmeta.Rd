@@ -4,7 +4,7 @@
 \name{packmeta}
 \alias{packmeta}
 \title{packmeta}
-\format{An object of class \code{matrix} with 10718 rows and 17 columns.}
+\format{An object of class \code{matrix} with 11328 rows and 17 columns.}
 \usage{
 packmeta
 }

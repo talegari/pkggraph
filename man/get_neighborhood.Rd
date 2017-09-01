@@ -35,7 +35,7 @@ Obtain dependencies and reverse dependencies of packages at a
 }
 \examples{
 # explore first level dependencies
-pkggraph::init()
+pkggraph::init(local = TRUE)
 pkggraph::get_neighborhood("caret")
 
 # explore second level dependencies

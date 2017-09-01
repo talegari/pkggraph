@@ -9,4 +9,4 @@ The package [`pkggraph`](https://cran.r-project.org/package=pkggraph) is meant t
 
 ### Usage
 
-See the [vignette](https://cran.r-project.org/web/packages/pkggraph/vignettes/vignette_pkggraph.html) for more details.
+See the vignette on the [CRAN](https://cran.r-project.org/package=pkggraph) page for more details.

@@ -18,7 +18,7 @@ TRUE or FALSE
 Check whether pkg_1 has a dependency on pkg_2
 }
 \examples{
-pkggraph::init()
+pkggraph::init(local = TRUE)
 "dplyr" \%enhances\% "tibble"
 }
 \author{

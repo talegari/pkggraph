@@ -8,7 +8,7 @@
 #'   recursive dependencies of these types: "Depends", "Imports", "LinkingTo")
 #' @seealso \code{\link{reverse_relies}}
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' pkggraph::relies("tidytext")
 #' @export
 relies <- function(packages){
@@ -16,7 +16,7 @@ relies <- function(packages){
   # assertions ----
   stopifnot(is.character(packages) && length(packages) > 0)
   if(!exists("packmeta")){
-    stop("Unable to find `packmeta`. Please run `pkggraph::init()`.")
+    stop("Unable to find `packmeta`. Please run `pkggraph::init(local = TRUE)`.")
   }
 
   # call with recursive ----
@@ -39,7 +39,7 @@ relies <- function(packages){
 #'   "LinkingTo")
 #' @seealso \code{\link{relies}}
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' pkggraph::reverse_relies("data.table")
 #' @export
 reverse_relies <- function(packages){
@@ -47,7 +47,7 @@ reverse_relies <- function(packages){
   # assertions ----
   stopifnot(is.character(packages) && length(packages) > 0)
   if(!exists("packmeta")){
-    stop("Unable to find `packmeta`. Please run `pkggraph::init()`.")
+    stop("Unable to find `packmeta`. Please run `pkggraph::init(local = TRUE)`.")
   }
 
   # call with recursive ----

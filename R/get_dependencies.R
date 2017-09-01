@@ -21,7 +21,7 @@ get_dependencies <- function(packages
               )
     stopifnot(is.logical(reverse) && length(reverse) == 1)
     if(!exists("deptable")){
-      stop("Unable to find `deptable`. Please run `pkggraph::init()`.")
+      stop("Unable to find `deptable`. Please run `pkggraph::init(local = TRUE)`.")
     }
   }
 

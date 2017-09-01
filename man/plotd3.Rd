@@ -19,7 +19,7 @@ D3 network of a pkggraph object
 }
 \examples{
 \dontrun{
-  pkggraph::init()
+  pkggraph::init(local = TRUE)
   plot_obj <- pkggraph::neighborhood_graph("hash")
   pkggraph::plotd3(plot_obj)
 

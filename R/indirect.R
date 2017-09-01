@@ -9,7 +9,7 @@
 #'   \code{\link{get_reverse_enhances}}, \code{\link{get_all_reverse_dependencies}},
 #'   \code{\link{get_depends}}
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' pkggraph::get_reverse_depends("utils")
 #' @export
 get_reverse_depends <- function(packages, level = 1L){
@@ -30,7 +30,7 @@ get_reverse_depends <- function(packages, level = 1L){
 #'   \code{\link{get_reverse_suggests}}, \code{\link{get_reverse_enhances}},
 #'   \code{\link{get_all_reverse_dependencies}}, \code{\link{get_imports}}
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' pkggraph::get_reverse_imports("Rcpp")
 #' @export
 get_reverse_imports <- function(packages, level = 1L){
@@ -51,7 +51,7 @@ get_reverse_imports <- function(packages, level = 1L){
 #'   \code{\link{get_reverse_suggests}}, \code{\link{get_reverse_enhances}},
 #'   \code{\link{get_all_reverse_dependencies}}, \code{\link{get_linkingto}}
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' pkggraph::get_reverse_linkingto("BH")
 #' @export
 get_reverse_linkingto <- function(packages, level = 1L){
@@ -72,7 +72,7 @@ get_reverse_linkingto <- function(packages, level = 1L){
 #'   \code{\link{get_reverse_enhances}}, \code{\link{get_all_reverse_dependencies}},
 #'   \code{\link{get_suggests}}
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' pkggraph::get_reverse_suggests("purrr")
 #' @export
 get_reverse_suggests <- function(packages, level = 1L){
@@ -93,7 +93,7 @@ get_reverse_suggests <- function(packages, level = 1L){
 #'   \code{\link{get_reverse_suggests}}, \code{\link{get_reverse_enhances}},
 #'   \code{\link{get_all_reverse_dependencies}}, \code{\link{get_enhances}}
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' pkggraph::get_reverse_enhances("synchronicity")
 #' @export
 get_reverse_enhances <- function(packages, level = 1L){
@@ -117,7 +117,7 @@ get_reverse_enhances <- function(packages, level = 1L){
 #' @return A tibble with three columns: `pkg_1`, `relation` and `pkg_2`
 #' @seealso \code{\link{get_all_dependencies}}
 #' @examples
-#' pkggraph::init()
+#' pkggraph::init(local = TRUE)
 #' # general use
 #' pkggraph::get_all_reverse_dependencies("mlr")
 #' # specify two levels
@@ -148,7 +148,7 @@ get_all_reverse_dependencies <- function(packages
                                          )){
   # assertions ----
   if(!exists("deptable")){
-    stop("Unable to find `deptable`. Please run `pkggraph::init()`.")
+    stop("Unable to find `deptable`. Please run `pkggraph::init(local = TRUE)`.")
   }
   stopifnot(is.character(packages) && length(packages) > 0)
   stopifnot(length(level) == 1 &&

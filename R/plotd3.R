@@ -7,7 +7,7 @@
 #' @param width parameter to change the width of the d3 plot. Default is 1000
 #' @examples
 #' \dontrun{
-#'   pkggraph::init()
+#'   pkggraph::init(local = TRUE)
 #'   plot_obj <- pkggraph::neighborhood_graph("hash")
 #'   pkggraph::plotd3(plot_obj)
 #'

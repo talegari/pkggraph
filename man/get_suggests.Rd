@@ -18,7 +18,7 @@ A tibble with three columns: `pkg_1`, `relation` and `pkg_2`
 Get dependencies
 }
 \examples{
-pkggraph::init()
+pkggraph::init(local = TRUE)
 pkggraph::get_suggests("knitr")
 }
 \seealso{
