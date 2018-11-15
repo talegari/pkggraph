@@ -4,10 +4,10 @@
 \alias{get_all_reverse_dependencies}
 \title{get_all_reverse_dependencies}
 \usage{
-get_all_reverse_dependencies(packages, level = 1L, relation = c("Depends",
-  "Imports", "LinkingTo", "Suggests", "Enhances"), strict = FALSE,
-  ignore = c("datasets", "utils", "grDevices", "graphics", "stats",
-  "methods"))
+get_all_reverse_dependencies(packages, level = 1L,
+  relation = c("Depends", "Imports", "LinkingTo", "Suggests",
+  "Enhances"), strict = FALSE, ignore = c("datasets", "utils",
+  "grDevices", "graphics", "stats", "methods"))
 }
 \arguments{
 \item{packages}{(non-empty character vector) Package names}

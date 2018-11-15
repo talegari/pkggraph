@@ -1,3 +1,5 @@
+- 0.2.3:
+    - Handled breaking changes with BiocManager instead of BiocInstaller. This requires R >= 3.5.0
 - 0.2.2:
     - 'init' is done better using `data.table`. Time reduced to less than 1/5 what is used to take.
     - 'init' has the new default of `local = FALSE`.

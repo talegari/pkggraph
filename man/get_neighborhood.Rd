@@ -4,10 +4,10 @@
 \alias{get_neighborhood}
 \title{get_neighborhood}
 \usage{
-get_neighborhood(packages, level = 1L, relation = c("Depends", "Imports",
-  "LinkingTo", "Suggests", "Enhances"), strict = FALSE, interconnect = TRUE,
-  ignore = c("datasets", "utils", "grDevices", "graphics", "stats",
-  "methods"))
+get_neighborhood(packages, level = 1L, relation = c("Depends",
+  "Imports", "LinkingTo", "Suggests", "Enhances"), strict = FALSE,
+  interconnect = TRUE, ignore = c("datasets", "utils", "grDevices",
+  "graphics", "stats", "methods"))
 }
 \arguments{
 \item{packages}{(non-empty character vector) Package names}

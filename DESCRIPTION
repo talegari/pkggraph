@@ -1,7 +1,7 @@
 Package: pkggraph
 Type: Package
 Title: A Consistent and Intuitive Platform to Explore the Dependencies of Packages on the Comprehensive R Archive Network Like Repositories
-Version: 0.2.2
+Version: 0.2.3
 Authors@R: c(
     person("KS", "Srikanth", email = "sri.teach@gmail.com", role = c("aut", "cre")),
     person("Singh", "Nikhil", email = "nikhilsingh2009@gmail.com", role = c("aut"))
@@ -22,21 +22,20 @@ Imports:
     utils,
     plyr (>= 1.8.4)
 Depends:
-    R (>= 3.4.0),
+    R (>= 3.5.0),
     ggnetwork (>= 0.5.1),
     ggplot2 (>= 2.2.1),
     data.table (>= 1.10.4)
 License: GPL-3
 Encoding: UTF-8
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 Suggests:
     knitr (>= 1.15.1),
     rmarkdown (>= 1.4),
     magrittr (>= 1.5),
     sna (>= 2.4),
     statnet.common (>= 3.3.0),
-    tidyverse (>= 1.1.1),
-    BiocInstaller (>= 1.24.0)
+    BiocManager (>= 1.30.4)
 VignetteBuilder: knitr
 URL: https://github.com/talegari/pkggraph
 BugReports: https://github.com/talegari/pkggraph/issues

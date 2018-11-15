@@ -53,10 +53,10 @@ init <- function(local        = FALSE
                          , "BioCann"
                          , "BioCexp"
                          , "BioCextra")){
-      if(!requireNamespace("BiocInstaller")){
-        stop("Missing 'BiocInstaller' package. Please install it from Bioconductor.")
+      if(!requireNamespace("BiocManager")){
+        stop("Missing 'BiocManager' package")
       } else {
-        repos_lookup <- c(repos_lookup, BiocInstaller::biocinstallRepos())
+        repos_lookup <- c(repos_lookup, BiocManager::repositories())
       }
     }
   }

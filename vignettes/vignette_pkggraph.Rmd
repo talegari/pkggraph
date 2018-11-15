@@ -19,7 +19,7 @@ abstract: The package [`pkggraph`](https://cran.r-project.org/package=pkggraph) 
 # Quickstart
 
 ```{R}
-suppressPackageStartupMessages(library("tidyverse"))      # for tidy data manipulations
+suppressPackageStartupMessages(library("dplyr"))          # for tidy data manipulations
 suppressPackageStartupMessages(library("magrittr"))       # for friendly piping
 suppressPackageStartupMessages(library("network"))        # for plotting
 suppressPackageStartupMessages(library("sna"))            # for plotting

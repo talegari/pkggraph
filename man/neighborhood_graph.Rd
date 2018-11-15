@@ -5,9 +5,10 @@
 \title{neighborhood_graph}
 \usage{
 neighborhood_graph(packages, level = 1L, type = "igraph",
-  relation = c("Depends", "Imports", "LinkingTo", "Suggests", "Enhances"),
-  strict = FALSE, interconnect = TRUE, ignore = c("datasets", "utils",
-  "grDevices", "graphics", "stats", "methods"))
+  relation = c("Depends", "Imports", "LinkingTo", "Suggests",
+  "Enhances"), strict = FALSE, interconnect = TRUE,
+  ignore = c("datasets", "utils", "grDevices", "graphics", "stats",
+  "methods"))
 }
 \arguments{
 \item{packages}{(non-empty character vector) Package names}
