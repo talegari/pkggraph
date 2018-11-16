@@ -45,19 +45,25 @@ init <- function(local        = FALSE
 
   # set up repository ----
   if(!local){
-    if(!is.null(repository))
-    repos_lookup <- list()
-    repos_lookup[["CRAN"]]     <- "https://cran.rstudio.com/"
-    repos_lookup[["omegahat"]] <- "http://www.omegahat.net/R"
-    if(repository %in% c("BioCsoft"
-                         , "BioCann"
-                         , "BioCexp"
-                         , "BioCextra")){
-      if(!requireNamespace("BiocManager")){
-        stop("Missing 'BiocManager' package")
-      } else {
-        repos_lookup <- c(repos_lookup, BiocManager::repositories())
+    if(!is.null(repository)){
+      repos_lookup <- list()
+      repos_lookup[["CRAN"]]     <- "https://cran.rstudio.com/"
+      repos_lookup[["omegahat"]] <- "http://www.omegahat.net/R"
+      if(repository %in% c("BioCsoft"
+                           , "BioCann"
+                           , "BioCexp"
+                           , "BioCextra")){
+        if(!requireNamespace("BiocManager")){
+          stop("Missing 'BiocManager' package")
+        } else {
+          repos_lookup <- c(repos_lookup, BiocManager::repositories())
+        }
       }
+    } else {
+      if(is.null(extra_args[["repos"]])){
+        stop("When repository is NULL, repos needs to be specified")
+      }
+      repos_lookup <- extra_args[["repos"]]
     }
   }
 
