@@ -202,5 +202,5 @@ get_all_dependencies <- function(packages
   }
 
   # arrange by relation and return ----
-  return(dplyr::arrange_(res, "relation"))
+  return(dplyr::arrange(res, .data[["relation"]]))
 }
