@@ -22,6 +22,8 @@ Imports:
     BiocManager (>= 1.30.27),
     tools,
     utils,
+Depends:
+  R (>= 4.1.0),
 Suggests:
   rmarkdown
 License: GPL-3
