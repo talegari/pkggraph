@@ -1,0 +1,70 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+devtools::load_all()
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# pkggraph
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+> Explore various dependencies of a package(s) (on the Comprehensive R Archive Network Like repositories).
+
+## Utilities
+
+Start with `init()` which gets metadata from a CRAN like repository.
+
+The package offers four functions:
+
+1. `get_dependencies()`: Get direct or indirect dependencies of a set of packages at desired depth (as a dataframe).
+2. `get_neighborhood()`: Get both direct and indirect of a set of packages at desired depth (as a dataframe).
+3. `as_graph()`: Get metadata embedded `igraph` equivalent of a dependency dataframe.
+4. `plot()`: Static plot of dependency graph.
+
+## Example
+
+```{r}
+suppressPackageStartupMessages(library("dplyr"))
+init()
+
+# what does `mboost` package do
+packmeta |> filter(Package == "mboost") |> pull(Description) |> cat()
+
+# Get direct 'import' dependencies of `mboost` two levels deeper
+get_dependencies("mboost", level = 2, relation = "Imports")
+
+# Get neighborhood (direct and indirect) dependencies (of all types) of `mboost` one level deeper
+get_neighborhood("mboost", level = 1)
+
+# convert a dependency dataframe to a graph
+get_neighborhood("mboost", level = 1) |> as_graph()
+
+# plot a dependency graph
+get_neighborhood("mboost", level = 1, relation = "Imports") |> as_graph() |> plot()
+```
+
+## Installation
+
+From CRAN:
+
+``` r
+pak::pkg_install("pkggraph")
+```
+
+You can install the development version of pkggraph from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("talegari/pkggraph")
+```

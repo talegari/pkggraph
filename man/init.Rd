@@ -2,33 +2,33 @@
 % Please edit documentation in R/init.R
 \name{init}
 \alias{init}
-\title{init}
+\title{Create package metadata and dependency dataframes}
 \usage{
-init(local = FALSE, repository = "CRAN", ...)
+init(repository = "CRAN", ...)
 }
 \arguments{
-\item{local}{(flag, default: FALSE) If \itemize{ \item FALSE: Tries to to
-download package data from CRAN over internet and compute dependencies
-\item TRUE: Loads data that comes with the package corresponding to 2nd
-September 2017 02:04 IST}}
-
-\item{repository}{(character vector, Default: "CRAN") One among c("CRAN",
+\item{repository}{(\code{chr[1]}, Default: "CRAN") One among c("CRAN",
 "BioCsoft", "BioCann", "BioCexp", "BioCextra", "omegahat"). To use a
 repository not in this list, set 'repository' to NULL and pass named
 argument called 'repos' with a valid repository address. This will be
-passed as is to `utils::available.packages()`.}
+passed as is to \code{\link[utils:available.packages]{utils::available.packages()}}.}
 
-\item{...}{Additional parameters to be passed to `available.packages()`}
+\item{...}{Parameters to be passed to \code{\link[utils:available.packages]{utils::available.packages()}}}
 }
 \value{
-An invisible TRUE
+TRUE (invisibly)
 }
 \description{
 Initiate the package by loading the data into parent frame. This
-  should be done as soon as the package is loaded or attached. This
-  creates(rewrites) new variables 'deptable' and 'packmeta' to the
-  environment where it is run from.
+should be done as soon as the package is loaded or attached. This
+creates(rewrites) new variables \code{deptable} and \code{packmeta} to the
+environment where it is run from.
 }
-\author{
-Srikanth KS
+\details{
+Format of \code{packmeta}: A dataframe with one row per package with some
+metadata.
+
+Format of \code{deptable}: Dataframe with three columns pkg_1 (chr), relation
+(factor, levels = \code{Depends}, \code{Imports}, \code{Suggests}, \code{LinkingTo},
+\code{Enhances}), pkg_2 (chr)
 }
