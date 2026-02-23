@@ -6,7 +6,7 @@ Authors@R: c(
     person("Komala Sheshachala", "Srikanth", email = "sri.teach@gmail.com", role = c("aut", "cre")),
     person("Singh", "Nikhil", email = "nikhilsingh2009@gmail.com", role = c("aut"))
     )
-Description: Explore various dependencies of a package(s) (on the Comprehensive R Archive Network Like repositories). The functions `get_neighborhood` and `get_dependencies` provide dependencies of packages and `as_graph` can be used to convert into a igraph object for further analysis and plotting.
+Description: Explore various dependencies of a packages (on the Comprehensive R Archive Network Like repositories). The functions get_neighborhood() and get_dependencies() provide dependencies of packages and as_graph() can be used to convert into a 'igraph' object for further analysis and plotting.
 Imports:
     dplyr (>= 1.0.1),
     tidyr (>= 1.3.0),
