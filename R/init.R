@@ -4,11 +4,11 @@
 #'   should be done as soon as the package is loaded or attached. This
 #'   creates(rewrites) new variables `deptable` and `packmeta` to the
 #'   environment where it is run from.
-#' @param repository (`chr[1]`, Default: "CRAN") One among c("CRAN",
-#'   "BioCsoft", "BioCann", "BioCexp", "BioCextra", "omegahat"). To use a
-#'   repository not in this list, set 'repository' to NULL and pass named
-#'   argument called 'repos' with a valid repository address. This will be
-#'   passed as is to [utils::available.packages()].
+#' @param repository (`chr[1]`, Default: "CRAN") One among c("CRAN", "BioCsoft",
+#'   "BioCann", "BioCexp", "BioCextra", "omegahat"). To use a repository not in
+#'   this list, set 'repository' to NULL and pass named argument called 'repos'
+#'   with a valid repository address. This will be passed as is to
+#'   [utils::available.packages()].
 #' @param ... Parameters to be passed to [utils::available.packages()]
 #' @return TRUE (invisibly)
 #' @details Format of `packmeta`: A dataframe with one row per package with some
@@ -21,43 +21,50 @@
 
 init = function(repository = "CRAN", ...){
 
+  # assertions ----
   assert_string(repository, null.ok = TRUE)
   known_repositories_chr = c("CRAN", "BioCsoft", "BioCann",
                              "BioCexp", "BioCextra", "omegahat"
                              )
   if (!is.null(repository)) assert_subset(repository, known_repositories_chr)
   extra_args = list(...)
-  get_ap = utils::available.packages
-  ts_value = Sys.time()
+  get_ap     = utils::available.packages
+  ts_value   = Sys.time()
 
-  # set up repository ----
-  if(!is.null(repository)){
+  # set up 'repos_lookup' ----
+  if (!is.null(repository)){
     repos_lookup               = list()
     repos_lookup[["CRAN"]]     = "https://cran.rstudio.com/"
     repos_lookup[["omegahat"]] = "http://www.omegahat.net/R"
 
     bioc_packages_chr = c("BioCsoft", "BioCann", "BioCexp", "BioCextra")
     if (repository %in% bioc_packages_chr){
-      check_installed("BiocManager")
-      if (!is_installed("BiocManager")){
-        abort("Missing 'BiocManager' package")
+
+      # offer 'BiocManager' installation and check
+      rlang::check_installed("BiocManager")
+      if (!rlang::is_installed("BiocManager")){
+        rlang::abort("Missing 'BiocManager' package")
       } else {
         repos_lookup = c(repos_lookup, BiocManager::repositories())
       }
     }
   } else {
+
+    # when user is trying to use an unknown bioc repo,
+    # then it needs to be specified
     if (is.null(extra_args[["repos"]])){
-      abort("When repository is NULL, repos needs to be specified")
+      rlang::abort("When repository is NULL, repos needs to be specified")
     }
+
     repos_lookup = extra_args[["repos"]]
   }
 
   # obtain and set data ----
-  cli_alert_info("Fetching package metadata from repositories ...")
+  cli::cli_alert_info("Fetching package metadata from repositories ...")
   # get package metadata
   if (!is.null(repository)){
     packmeta = lapply(repos_lookup[repository],
-                      \(.x) as_tibble(get_ap(repos = .x))
+                      \(.x) tibble::as_tibble(get_ap(repos = .x))
                       )
     packmeta = bind_rows(packmeta)
   } else {
@@ -77,7 +84,7 @@ init = function(repository = "CRAN", ...){
   assign("packmeta", packmeta, envir = parent.frame())
 
   # compute dependency table ----
-  cli_alert_info("Computing package dependencies ...")
+  cli::cli_alert_info("Computing package dependencies ...")
 
   deptable =
     packmeta |>
@@ -98,6 +105,6 @@ init = function(repository = "CRAN", ...){
   attr(deptable, "timestamp") = ts_value
   assign("deptable", deptable, envir = parent.frame())
 
-  cli_alert_success("Done!")
+  cli::cli_alert_success("Done!")
   return(invisible(TRUE))
 }

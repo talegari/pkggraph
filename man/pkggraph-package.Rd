@@ -6,7 +6,7 @@
 \alias{pkggraph-package}
 \title{pkggraph: Explore the R Package Dependencies on the Comprehensive R Archive Network (CRAN) Like Repositories}
 \description{
-Explore various dependencies of a package(s) (on the Comprehensive R Archive Network Like repositories). The functions `get_neighborhood` and `get_dependencies` provide dependencies of packages and `as_graph` can be used to convert into a igraph object for further analysis and plotting.
+Explore various dependencies of a packages (on the Comprehensive R Archive Network Like repositories). The functions get_neighborhood() and get_dependencies() provide dependencies of packages and as_graph() can be used to convert into a 'igraph' object for further analysis and plotting.
 }
 \seealso{
 Useful links:

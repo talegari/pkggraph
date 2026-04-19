@@ -50,7 +50,7 @@ get_dependencies = function(packages,
                             ){
   # assertions
   if (!exists("deptable")){
-    abort("Unable to find `deptable`. Did you run `init`?")
+    rlang::abort("Unable to find `deptable`. Did you run `init`?")
   }
 
   assert_character(packages, min.len = 1, unique = TRUE)
@@ -217,7 +217,8 @@ as_graph = function(dependency_df){
                              )
 
   package_title_df =
-    tibble("Package" = union(dependency_df$pkg_1, dependency_df$pkg_2)) |>
+    tibble::tibble(
+      "Package" = base::union(dependency_df$pkg_1, dependency_df$pkg_2)) |>
     left_join(select(packmeta, Package, Title), by = "Package") |>
     select(Package, Title)
 

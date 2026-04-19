@@ -7,11 +7,11 @@
 init(repository = "CRAN", ...)
 }
 \arguments{
-\item{repository}{(\code{chr[1]}, Default: "CRAN") One among c("CRAN",
-"BioCsoft", "BioCann", "BioCexp", "BioCextra", "omegahat"). To use a
-repository not in this list, set 'repository' to NULL and pass named
-argument called 'repos' with a valid repository address. This will be
-passed as is to \code{\link[utils:available.packages]{utils::available.packages()}}.}
+\item{repository}{(\code{chr[1]}, Default: "CRAN") One among c("CRAN", "BioCsoft",
+"BioCann", "BioCexp", "BioCextra", "omegahat"). To use a repository not in
+this list, set 'repository' to NULL and pass named argument called 'repos'
+with a valid repository address. This will be passed as is to
+\code{\link[utils:available.packages]{utils::available.packages()}}.}
 
 \item{...}{Parameters to be passed to \code{\link[utils:available.packages]{utils::available.packages()}}}
 }

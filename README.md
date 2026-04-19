@@ -46,7 +46,7 @@ packmeta |> filter(Package == "mboost") |> pull(Description) |> cat()
 
 # Get direct 'import' dependencies of `mboost` two levels deeper
 get_dependencies("mboost", level = 2, relation = "Imports")
-#> # A tibble: 53 × 3
+#> # A tibble: 58 × 3
 #>    pkg_1  relation pkg_2     
 #>    <chr>  <fct>    <chr>     
 #>  1 BayesX Imports  coda      
@@ -57,13 +57,13 @@ get_dependencies("mboost", level = 2, relation = "Imports")
 #>  6 BayesX Imports  splines   
 #>  7 Matrix Imports  grid      
 #>  8 Matrix Imports  grid      
-#>  9 Matrix Imports  lattice   
+#>  9 Matrix Imports  grid      
 #> 10 Matrix Imports  lattice   
-#> # ℹ 43 more rows
+#> # ℹ 48 more rows
 
 # Get neighborhood (direct and indirect) dependencies (of all types) of `mboost` one level deeper
 get_neighborhood("mboost", level = 1)
-#> # A tibble: 219 × 3
+#> # A tibble: 222 × 3
 #>    pkg_1                     relation pkg_2   
 #>    <chr>                     <fct>    <chr>   
 #>  1 FDboost                   Depends  mboost  
@@ -76,13 +76,13 @@ get_neighborhood("mboost", level = 1)
 #>  8 catdata                   Depends  MASS    
 #>  9 censored                  Depends  survival
 #> 10 expectreg                 Depends  BayesX  
-#> # ℹ 209 more rows
+#> # ℹ 212 more rows
 
 # convert a dependency dataframe to a graph
 get_neighborhood("mboost", level = 1) |> as_graph()
-#> IGRAPH 148602e DN-- 55 219 -- 
+#> IGRAPH 146a4f2 DN-- 56 222 -- 
 #> + attr: name (v/c), title (v/c), relation (e/c)
-#> + edges from 148602e (vertex names):
+#> + edges from 146a4f2 (vertex names):
 #>  [1] FDboost                  ->mboost      
 #>  [2] InvariantCausalPrediction->mboost      
 #>  [3] TH.data                  ->MASS        

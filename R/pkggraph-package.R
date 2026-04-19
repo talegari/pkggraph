@@ -2,12 +2,10 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @import rlang
 #' @import checkmate
 #' @import dplyr
 #' @import tidyr
 #' @import cli
-#' @import tibble
 #' @import stringr
 #' @import ggraph
 #' @importFrom ggplot2 aes arrow
